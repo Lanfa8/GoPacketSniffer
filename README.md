@@ -1,10 +1,17 @@
 # GoPacketSniffer
 
-This repository contains a simple packet sniffer written in Go (Golang), using the `gopacket` library. It's designed to capture and display TCP packets on a specified network interface.
+This repository contains a comprehensive packet sniffer written in Go (Golang), using the `gopacket` library. It's designed to capture and analyze various network protocols including IP, TCP, UDP, and ICMP packets on a specified network interface.
 
 ## Introduction
 
-The Go Packet Sniffer is a basic tool for network analysis, similar in concept to Wireshark, but much simpler. It captures TCP packets, displaying their source and destination ports, sequence numbers, and payloads (if readable as text).
+The Go Packet Sniffer is a network analysis tool, similar in concept to Wireshark, but focused on educational purposes and simplicity. It captures and analyzes packets from multiple protocols, displaying detailed information about each packet type.
+
+## Supported Protocols
+
+- **IP (IPv4 and IPv6)**: Source and destination IP addresses, TTL/Hop Limit, and IP version
+- **TCP**: Source and destination ports, sequence numbers, and payload content
+- **UDP**: Source and destination ports, packet size, and payload content  
+- **ICMP (ICMPv4 and ICMPv6)**: Message type, code, and checksum
 
 ## Prerequisites
 
@@ -35,13 +42,37 @@ Before you can run the packet sniffer, you need to have the following installed:
    make
    sudo ./sniffer
    ```
-2. The sniffer will start capturing TCP packets on the default network interface. You can modify the source code to change the target interface or apply different filters.
+2. The sniffer will start capturing packets from all supported protocols on the default network interface (eth0). You can modify the source code to change the target interface or apply different filters.
+
+## Sample Output
+
+```
+--- New Packet ---
+[IPv4] Source: 192.168.1.10 -> Destination: 8.8.8.8 | TTL: 64 | Version: 4
+[UDP] Source Port: 53461 -> Destination Port: 53 | Length: 36 bytes
+[UDP] Payload: DNS query data...
+
+--- New Packet ---
+[IPv4] Source: 10.0.0.1 -> Destination: 10.0.0.2 | TTL: 64 | Version: 4
+[TCP] Source Port: 80 -> Destination Port: 54321 | Seq: 1234567890
+[TCP] Payload: HTTP/1.1 200 OK...
+
+--- New Packet ---
+[IPv4] Source: 192.168.1.1 -> Destination: 192.168.1.255 | TTL: 64 | Version: 4
+[ICMPv4] Type: 8 | Code: 0 | Checksum: 0x1234
+```
 
 ## Features
 
-- Captures TCP packets, including source/destination ports and sequence numbers.
-- Displays readable text payloads from TCP packets.
-- Easily modifiable for different network interfaces or packet types.
+- **Multi-protocol support**: Captures and analyzes IP, TCP, UDP, and ICMP packets
+- **IPv4 and IPv6 support**: Full support for both IP versions
+- **Detailed packet information**: 
+  - IP layer: Source/destination addresses, TTL, version
+  - TCP layer: Source/destination ports, sequence numbers, payload
+  - UDP layer: Source/destination ports, packet size, payload
+  - ICMP layer: Message type, code, checksum
+- **Real-time packet analysis**: Live capture and display of network traffic
+- **Educational-focused**: Clean, readable output format for learning network protocols
 
 ## Disclaimer
 
