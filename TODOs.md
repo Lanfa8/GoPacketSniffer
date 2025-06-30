@@ -1,9 +1,14 @@
 # TODOs
 
-### Core Functionality Enhancements
+### ✅ Completed Features
+1. **✅ Support for IPv6**: IPv6 traffic handling implemented with source/destination addresses, hop limit, and version display.
+2. **✅ Multi-Protocol Support**: Added support for IP (IPv4/IPv6), TCP, UDP, and ICMP protocols.
+3. **✅ Enhanced Packet Analysis**: Each protocol now displays specific relevant information (TTL, ports, checksums, etc.).
+
+### Core Functionality Enhancements  
 1. **Implement Protocol-Specific Decoders**: Develop decoders for common protocols like HTTP, DNS, and ARP for more detailed packet analysis.
 2. **Add Packet Filtering Options**: Allow users to set filters for specific IP addresses, ports, or protocols.
-3. **Support for IPv6**: Ensure the packet sniffer can handle IPv6 traffic effectively.
+3. **Support for Additional Protocols**: Add support for ARP, DHCP, and other network protocols.
 
 ### Performance and Scalability
 4. **Optimize for High Volume Traffic**: Improve the efficiency of the packet capturing process to handle high network throughput.
