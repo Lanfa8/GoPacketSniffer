@@ -6,3 +6,7 @@ clean:
 
 run:
 	./sniffer
+
+list-interfaces:
+	@echo "Available network interfaces:"
+	@ls /sys/class/net/ | sed 's/^/  /'

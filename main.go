@@ -3,10 +3,12 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
 	"github.com/google/gopacket/pcap"
+	"github.com/joho/godotenv"
 )
 
 // processIPLayer processes IPv4 and IPv6 layers
@@ -71,8 +73,26 @@ func processICMPLayer(packet gopacket.Packet) {
 	}
 }
 
+// loadConfig loads the network interface from environment variables
+func loadConfig() string {
+	if err := godotenv.Load(); err != nil {
+		log.Printf("Warning: .env file not found, using default interface")
+	}
+
+	networkInterface := os.Getenv("NETWORK_INTERFACE")
+	if networkInterface == "" {
+		networkInterface = "enp1s0"
+		log.Printf("Warning: NETWORK_INTERFACE not set, using default: %s", networkInterface)
+	}
+
+	return networkInterface
+}
+
 func main() {
-	handle, err := pcap.OpenLive("eth0", 1600, true, pcap.BlockForever)
+	networkInterface := loadConfig()
+	fmt.Printf("Using network interface: %s\n", networkInterface)
+
+	handle, err := pcap.OpenLive(networkInterface, 1600, true, pcap.BlockForever)
 	if err != nil {
 		log.Fatal(err)
 	}
